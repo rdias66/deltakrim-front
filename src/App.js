@@ -1,13 +1,10 @@
 import './App.css';
+import Login from './Login';
 
 function App() {
   return (
-    <div className="App">
-      <div className="App-box">
-        <p>
-          Work in progress
-        </p>
-      </div>
+    <div>
+      <Login />
     </div>
   );
 }
