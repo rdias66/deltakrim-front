@@ -1,1 +1,17 @@
-
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #43164d;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.center-box {
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
