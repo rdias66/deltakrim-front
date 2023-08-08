@@ -15,6 +15,7 @@ const Login = () => {
           </button>
         </form>
       </div>
+      <footer>Powered by days66</footer>
     </div>
   );
 };
