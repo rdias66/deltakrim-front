@@ -45,3 +45,12 @@ button:hover {
 input::placeholder {
     color: #aaa;
 }
+
+.footer {
+    width: 100%;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+}
