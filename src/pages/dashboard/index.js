@@ -1,33 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
 const TodoDashboard = () => {
-  const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState({
-    title: '',
-    description: '',
-    enteringDate: '',
-    dueDate: '',
-    state: ''
-  });
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const [tasks, setTasks] = React.useState([]);
 
-  const addTask = () => {
-    if (newTask.title.trim() !== '') {
-      const now = new Date();
-      const nowFormatted = now.toISOString();
-      const taskToAdd = { 
-        ...newTask, 
-        enteringDate :nowFormatted
-      };
-      
-      setTasks([...tasks, taskToAdd]);
-      setNewTask({
-        title: '',
-        description: '',
-        enteringDate: '',
-        dueDate: '',
-        state: ''
-      });
-    }
+  const onSubmit = (data) => {
+    const taskToAdd = {
+      ...data,
+      enteringDate: new Date().toISOString()
+    };
+
+    setTasks([...tasks, taskToAdd]);
+    reset();
   };
 
   const deleteTask = (index) => {
@@ -38,28 +23,27 @@ const TodoDashboard = () => {
   return (
     <div>
       <h1>Todo List Dashboard</h1>
-      <form>
-        {/* Input fields for task details */}
+      <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
           placeholder="Title"
-          value={newTask.title}
-          onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+          {...register('title', { required: true })}
         />
-         <input
+        {errors.title && <p>Title is required</p>}
+        <input
           type="text"
           placeholder="Description"
-          value={newTask.description}
-          onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+          {...register('Description', { required: true })}
         />
-          <input
+        {errors.description && <p>Description is required</p>}
+        <input
           type="text"
-          placeholder="Due date"
-          value={newTask.dueDate}
-          onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })}
+          placeholder="Due Date"
+          {...register('dueDate', { required: true })}
         />
-     
-        <button type="button" onClick={addTask}>Add Task</button>
+        {errors.dueDate && <p>Due date is required</p>}
+          
+        <button type="submit">Add Task</button>
       </form>
       <ul>
         {tasks.map((task, index) => (
@@ -67,7 +51,6 @@ const TodoDashboard = () => {
             <h3>{task.title}</h3>
             <p>{task.description}</p>
             <p>Due: {task.dueDate}</p>
-            {/* Display more attributes */}
             <button onClick={() => deleteTask(index)}>Delete</button>
           </li>
         ))}
