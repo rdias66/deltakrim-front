@@ -21,7 +21,7 @@ const TodoDashboard = () => {
   };
 
   return (
-    <div>
+    <div className="center-box">
       <h1>Todo List Dashboard</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
@@ -33,6 +33,7 @@ const TodoDashboard = () => {
         <input
           type="text"
           placeholder="Description"
+          className="input-description"
           {...register('Description', { required: true })}
         />
         {errors.description && <p>Description is required</p>}
